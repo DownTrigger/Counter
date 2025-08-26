@@ -27,6 +27,12 @@ class ViewController: UIViewController {
         }
     }
     
+    private let formatter: DateFormatter = {
+        let dateString = DateFormatter()
+        dateString.dateFormat = "dd.MM HH:mm:ss"
+        return dateString
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -54,23 +60,26 @@ class ViewController: UIViewController {
     
     @IBAction func didTapIncrementButton(_ sender: Any) {
         counter += 1
-        historyTextView.text = "\(history)" + "\nЗначение изменено на +1"
+        let dateString = formatter.string(from: Date())
+        historyTextView.text = "\(history)" + "\n\(dateString) : Значение изменено на +1"
         history = historyTextView.text
     }
     
     @IBAction func didTapDecrementButton(_ sender: Any) {
+        let dateString = formatter.string(from: Date())
         if counter > 0 {
             counter -= 1
-            historyTextView.text = "\(history)" + "\nЗначение изменено на -1"
+            historyTextView.text = "\(history)" + "\n\(dateString) : Значение изменено на -1"
         } else {
-            historyTextView.text = "\(history)" + "\nПопытка уменьшить значение счётчика ниже 0"
+            historyTextView.text = "\(history)" + "\n\(dateString) : попытка уменьшить значение счётчика ниже 0"
         }
         history = historyTextView.text
     }
   
     @IBAction func didTapResetButton(_ sender: Any) {
         counter = 0
-        historyTextView.text = "\(history)" + "\nЗначение сброшено"
+        let dateString = formatter.string(from: Date())
+        historyTextView.text = "\(history)" + "\n\(dateString) : Значение сброшено"
         history = historyTextView.text
     }
     
