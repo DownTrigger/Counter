@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private var history: String = "История изменений:\n"{
+    private var history: [String] = ["История изменений:"] {
         didSet {
             updateHistory()
         }
@@ -65,26 +65,24 @@ class ViewController: UIViewController {
     @IBAction func didTapIncrementButton(_ sender: Any) {
         counter += 1
         let dateString = formatter.string(from: Date())
-        historyTextView.text = "\(history)" + "\n\(dateString): Значение изменено на +1"
-        history = historyTextView.text
+        history.append("\(dateString): Значение изменено на +1")
+        
     }
     
     @IBAction func didTapDecrementButton(_ sender: Any) {
         let dateString = formatter.string(from: Date())
         if counter > 0 {
             counter -= 1
-            historyTextView.text = "\(history)" + "\n\(dateString): Значение изменено на -1"
+            history.append("\(dateString): Значение изменено на -1")
         } else {
-            historyTextView.text = "\(history)" + "\n\(dateString): Попытка уменьшить значение счётчика ниже 0"
+            history.append("\(dateString): Попытка уменьшить значение счётчика ниже 0")
         }
-        history = historyTextView.text
     }
   
     @IBAction func didTapResetButton(_ sender: Any) {
         counter = 0
         let dateString = formatter.string(from: Date())
-        historyTextView.text = "\(history)" + "\n\(dateString): Значение сброшено"
-        history = historyTextView.text
+        history.append("\n\(dateString): Значение сброшено")
     }
     
     private func updateUI() {
@@ -94,12 +92,12 @@ class ViewController: UIViewController {
     }
     
     private func updateHistory() {
-        historyTextView.text = "\(history)"
+        historyTextView.text = history.joined(separator: "\n")
         autoScroll()
     }
     
     private func autoScroll() {
-        let bottomRange = NSMakeRange(historyTextView.text.count - 2, 0)
+        let bottomRange = NSMakeRange(historyTextView.text.count - 1, 0)
         historyTextView.scrollRangeToVisible(bottomRange)
     }
     
