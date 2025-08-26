@@ -59,8 +59,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapDecrementButton(_ sender: Any) {
-        counter -= 1
-        historyTextView.text = "\(history)" + "\nЗначение изменено на -1"
+        if counter > 0 {
+            counter -= 1
+            historyTextView.text = "\(history)" + "\nЗначение изменено на -1"
+        } else {
+            historyTextView.text = "\(history)" + "\nПопытка уменьшить значение счётчика ниже 0"
+        }
         history = historyTextView.text
     }
   
@@ -72,8 +76,8 @@ class ViewController: UIViewController {
     
     private func updateUI() {
         counterLabel.text = "\(counter)"
-        decrementButton.isEnabled = counter > 0
-        decrementButton.backgroundColor = counter > 0 ? .blue : .systemGray
+//        decrementButton.isEnabled = counter > 0
+//        decrementButton.backgroundColor = counter > 0 ? .blue : .systemGray
     }
     
     private func updateHistory() {
