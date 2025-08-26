@@ -64,6 +64,7 @@ class ViewController: UIViewController {
         let dateString = formatter.string(from: Date())
         historyTextView.text = "\(history)" + "\n\(dateString) : Значение изменено на +1"
         history = historyTextView.text
+        autoScroll()
     }
     
     @IBAction func didTapDecrementButton(_ sender: Any) {
@@ -72,9 +73,10 @@ class ViewController: UIViewController {
             counter -= 1
             historyTextView.text = "\(history)" + "\n\(dateString) : Значение изменено на -1"
         } else {
-            historyTextView.text = "\(history)" + "\n\(dateString) : попытка уменьшить значение счётчика ниже 0"
+            historyTextView.text = "\(history)" + "\n\(dateString) : Попытка уменьшить значение счётчика ниже 0"
         }
         history = historyTextView.text
+        autoScroll()
     }
   
     @IBAction func didTapResetButton(_ sender: Any) {
@@ -82,6 +84,7 @@ class ViewController: UIViewController {
         let dateString = formatter.string(from: Date())
         historyTextView.text = "\(history)" + "\n\(dateString) : Значение сброшено"
         history = historyTextView.text
+        autoScroll()
     }
     
     private func updateUI() {
@@ -92,6 +95,11 @@ class ViewController: UIViewController {
     
     private func updateHistory() {
         historyTextView.text = "\(history)"
+    }
+    
+    private func autoScroll() {
+        let bottomRange = NSMakeRange(historyTextView.text.count - 1, 1)
+        historyTextView.scrollRangeToVisible(bottomRange)
     }
     
 }
