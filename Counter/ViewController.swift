@@ -15,7 +15,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var incrementButton: UIButton!
     @IBOutlet weak var counterLabel: UILabel!
     
-    private var counter: Int = 0
+    private var counter: Int = 0 {
+        didSet {
+            updateUI()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,21 +41,27 @@ class ViewController: UIViewController {
         resetButton.setTitle("", for: .normal)
         resetButton.backgroundColor = .green
         resetButton.layer.cornerRadius = 5
+        
+        updateUI()
     }
     
     @IBAction func didTapIncrementButton(_ sender: Any) {
         counter += 1
-        counterLabel.text = "\(counter)"
     }
     
     @IBAction func didTapDecrementButton(_ sender: Any) {
         counter -= 1
-        counterLabel.text = "\(counter)"
     }
   
     @IBAction func didTapResetButton(_ sender: Any) {
         counter = 0
-        counterLabel.text = "\(counter)"
     }
+    
+    private func updateUI() {
+        counterLabel.text = "\(counter)"
+        decrementButton.isEnabled = counter > 0
+        decrementButton.backgroundColor = counter > 0 ? .blue : .systemGray
+    }
+    
 }
 
