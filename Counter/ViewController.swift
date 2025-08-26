@@ -82,7 +82,7 @@ class ViewController: UIViewController {
     @IBAction func didTapResetButton(_ sender: Any) {
         counter = 0
         let dateString = formatter.string(from: Date())
-        history.append("\n\(dateString): Значение сброшено")
+        history.append("\(dateString): Значение сброшено")
     }
     
     private func updateUI() {
