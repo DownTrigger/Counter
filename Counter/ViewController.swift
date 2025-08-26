@@ -37,7 +37,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        counterLabel.text = "0"
+        historyTextView.isEditable = false
+        historyTextView.isSelectable = false
         
         incrementButton.setImage(UIImage(systemName: "plus"), for: .normal)
         incrementButton.setTitle("", for: .normal)
