@@ -21,6 +21,12 @@ class ViewController: UIViewController {
         }
     }
     
+    private var history: String = "История изменений:\n"{
+        didSet {
+            updateHistory()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -43,24 +49,35 @@ class ViewController: UIViewController {
         resetButton.layer.cornerRadius = 5
         
         updateUI()
+        updateHistory()
     }
     
     @IBAction func didTapIncrementButton(_ sender: Any) {
         counter += 1
+        historyTextView.text = "\(history)" + "\nЗначение изменено на +1"
+        history = historyTextView.text
     }
     
     @IBAction func didTapDecrementButton(_ sender: Any) {
         counter -= 1
+        historyTextView.text = "\(history)" + "\nЗначение изменено на -1"
+        history = historyTextView.text
     }
   
     @IBAction func didTapResetButton(_ sender: Any) {
         counter = 0
+        historyTextView.text = "\(history)" + "\nЗначение сброшено"
+        history = historyTextView.text
     }
     
     private func updateUI() {
         counterLabel.text = "\(counter)"
         decrementButton.isEnabled = counter > 0
         decrementButton.backgroundColor = counter > 0 ? .blue : .systemGray
+    }
+    
+    private func updateHistory() {
+        historyTextView.text = "\(history)"
     }
     
 }
