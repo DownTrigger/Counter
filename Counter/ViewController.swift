@@ -9,11 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var historyTextView: UITextView!
-    @IBOutlet weak var resetButton: UIButton!
-    @IBOutlet weak var decrementButton: UIButton!
-    @IBOutlet weak var incrementButton: UIButton!
-    @IBOutlet weak var counterLabel: UILabel!
+    @IBOutlet private weak var historyTextView: UITextView!
+    @IBOutlet private weak var resetButton: UIButton!
+    @IBOutlet private weak var decrementButton: UIButton!
+    @IBOutlet private weak var incrementButton: UIButton!
+    @IBOutlet private weak var counterLabel: UILabel!
     
     private var counter: Int = 0 {
         didSet {
@@ -35,7 +35,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         historyTextView.isEditable = false
         historyTextView.isSelectable = false
@@ -62,14 +61,14 @@ class ViewController: UIViewController {
         updateHistory()
     }
     
-    @IBAction func didTapIncrementButton(_ sender: Any) {
+    @IBAction private func didTapIncrementButton(_ sender: Any) {
         counter += 1
         let dateString = formatter.string(from: Date())
         history.append("\(dateString): Значение изменено на +1")
         
     }
     
-    @IBAction func didTapDecrementButton(_ sender: Any) {
+    @IBAction private func didTapDecrementButton(_ sender: Any) {
         let dateString = formatter.string(from: Date())
         if counter > 0 {
             counter -= 1
@@ -79,7 +78,7 @@ class ViewController: UIViewController {
         }
     }
   
-    @IBAction func didTapResetButton(_ sender: Any) {
+    @IBAction private func didTapResetButton(_ sender: Any) {
         counter = 0
         let dateString = formatter.string(from: Date())
         history.append("\(dateString): Значение сброшено")
@@ -87,8 +86,6 @@ class ViewController: UIViewController {
     
     private func updateUI() {
         counterLabel.text = "\(counter)"
-//        decrementButton.isEnabled = counter > 0
-//        decrementButton.backgroundColor = counter > 0 ? .blue : .systemGray
     }
     
     private func updateHistory() {
